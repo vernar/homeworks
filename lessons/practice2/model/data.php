@@ -6,7 +6,6 @@ if(isset($_GET['mysqli'])){
 } else {
     $engine = DBResource::DB_PDO;
 }
-var_dump($engine);
 $connection = new DBResource($engine);
 $result  = $connection->getDataAsArrayById();
 return $result;
