@@ -61,6 +61,9 @@ class DBResource
         if (strpos($comment, "редиска")){
             return;
         }
+        $name = htmlspecialchars($name);
+        $comment = htmlspecialchars($comment);
+
         $sql = 'INSERT INTO comments (name, comment, date_submit) VALUES (?, ?, NOW())';
         $this->db->prepare($sql)->execute([$name, $comment]);
     }
