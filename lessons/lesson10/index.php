@@ -60,7 +60,6 @@ if (!empty($login) ) {
     switch ($action) {
         case 'logoutaction':
              session_unset();
-             var_dump($_SESSION);
              header('location: ' . $siteurl . 'index.php');
              exit;
             break;
