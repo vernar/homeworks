@@ -13,6 +13,13 @@ class DBResource
     const DB_PDO = 0;
     const DB_Mysqli = 1;
 
+    const COMMENT_NEW = 0;
+    const COMMENT_APPROVED = 1;
+    const COMMENT_DECLINED = 2;
+
+    const ROLE_ADMIN = 0;
+    const ROLE_MODERATOR = 1;
+
     public function __construct(string $dbEngine, string $dbtable = 'portfolio', string $dbhost = 'localhost', string $dbuser = 'root', string $dbpass = 'root' )
     {
         if (isset($this->db) ){
@@ -41,7 +48,7 @@ class DBResource
         return $this->db;
     }
 
-    public function getComments(){
+    public function getAllComments(){
          if ($this->dbEngine === self::DB_PDO ) {
              /** @var PDO $db */
              $db = $this->db;
@@ -57,6 +64,22 @@ class DBResource
         return $result;
     }
 
+    public function getComments(){
+         if ($this->dbEngine === self::DB_PDO ) {
+             /** @var PDO $db */
+             $db = $this->db;
+             $result = $db->query("SELECT * FROM `comments` WHERE status = '" . self::COMMENT_APPROVED . "'")
+                ->fetchAll(PDO::FETCH_ASSOC);
+         }
+        if ($this->dbEngine === self::DB_Mysqli) {
+            /** @var mysqli $db */
+            $db = $this->db;
+            $result = $db->query("SELECT * FROM `comments`  WHERE status = '" . self::COMMENT_APPROVED . "'")
+                ->fetch_all(MYSQLI_ASSOC);
+        }
+        return $result;
+    }
+
     public function addComment($name, $comment){
         if (strpos($comment, "редиска")){
             return;
@@ -66,6 +89,16 @@ class DBResource
 
         $sql = 'INSERT INTO comments (name, comment, date_submit) VALUES (?, ?, NOW())';
         $this->db->prepare($sql)->execute([$name, $comment]);
+    }
+
+    public function checkLoginAdmin($login, $password){
+        return $this->db->query("SELECT * FROM users WHERE name = '{$login}'  AND password = '{$password}'")
+                ->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function changeCommentStatus($id, $status){
+        $sql = 'UPDATE comments SET status = ? WHERE comment_id = ?';
+        $this->db->prepare($sql)->execute([$status, $id]);
     }
 
     public function getDataAsArrayById($id = 1)

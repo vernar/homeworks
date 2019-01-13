@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);       // устанавливает уровень отслеживаемых ошибок интерпретатором php
+ini_set('display_errors', 1); // дает команду интерпретатору php выводить все отслеживаемые ошибки в браузере
+
+session_start();
 $siteurl = 'http://homeworks.mgnout.com/lessons/lesson11/';
 
 require __DIR__ . '/DBResource.php';

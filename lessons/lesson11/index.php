@@ -39,9 +39,7 @@
             <ul class="list-unstyled contact-list">
                 <li class="email"><i class="fa fa-envelope"></i><a href="mailto: <?= $email ?>"><?= $email ?></a></li>
                 <li class="phone"><i class="fa fa-phone"></i><a href="<?=$phone ?>"><?=$phone ?></a></li>
-                <?php foreach ($website as $sitename => $url): ?>
-                    <li class="website"><i class="fa fa-globe"></i><a href="<?= $url ?>" target="_blank"><?=$sitename ?></a></li>
-                <?php endforeach; ?>
+                    <li class="website"><i class="fa fa-globe"></i><a href="<?= $website_url ?>" target="_blank"><?=$website_name ?></a></li>
             </ul>
         </div><!--//contact-container-->
         <div class="education-container container-block">
@@ -90,8 +88,8 @@
                 <div class="item">
                     <div class="meta">
                         <div class="upper-row">
-                            <h3 class="job-title"><?=$ext['job'] ?></h3>
-                            <div class="time"><?=$exp['dateFrom'] ?> - <?=$exp['dateTo'] ?></div>
+                            <h3 class="job-title"><?=$exp['job'] ?></h3>
+                            <div class="time"><?=$exp['date_from'] ?> - <?=$exp['date_to'] ?></div>
                         </div><!--//upper-row-->
                         <div class="company"><?=$exp['company'] ?></div>
                     </div><!--//meta-->

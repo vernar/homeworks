@@ -71,8 +71,23 @@ CREATE TABLE `comments`(
   `name` varchar(100) NOT NULL,
   `comment` TEXT,
   `date_submit` DATE NOT NULL,
+  `status` varchar(20) DEFAULT '0',
    PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users`(
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+   PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `users` (`user_id`, `name`, `email`, `role`, `password`) VALUES
+(1, 'admin', 'mail@gmail.com', '0', '123'),
+(2, 'moderator', 'asdfl@ad.com', '1', '123');
+
 
 INSERT INTO `person` (`name`, `tagline`, `email`, `phone`, `website_name`, `website_url`, `summary`) VALUES
 ('Arbuzov Dmitry', 'Technical support engineer', 'arbuzov.mail@gmail.com', '+375(29) 7447474', 'mtest.su', 'http://php7.mgtest.su/acv/lessons/lesson6/index.html', 'Начал свою карьеру с работы электромонтёром на одном из беларусских предприятий, параллельно заочно получая специальность "Инженер системотехник", что позволило мне через 3 года перевестить на должность "электронщик". <p>По окончанию учёбы, ушёл с работы на предприятии и устроился на работу, сотрудником техподдери, в одну из беларусских компаний веб разработки.');
