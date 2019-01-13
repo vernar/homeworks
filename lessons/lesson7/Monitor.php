@@ -109,5 +109,4 @@ class Monitor extends Product
             'диагональ - ' . $this->diagonal . ' дюймов ' .
             'тип матрицы - ' . $this->getDetailedMatrixType() . PHP_EOL;
     }
-
 }

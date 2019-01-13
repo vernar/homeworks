@@ -43,7 +43,6 @@ class Cart
         } else {
             $this->productsInCart[$product->getSku()] = 1;
         }
-
     }
 
     /**

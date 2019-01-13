@@ -2,10 +2,10 @@
 require __DIR__ . '/DBResource.php';
 
 if(isset($_GET['mysqli'])){
-    $engine = DBResource::DB_Mysqli;
+    $engine = productCollection::DB_Mysqli;
 } else {
-    $engine = DBResource::DB_PDO;
+    $engine = productCollection::DB_PDO;
 }
-$connection = new DBResource($engine);
+$connection = new productCollection($engine);
 $result  = $connection->getDataAsArrayById();
 return $result;
