@@ -1,4 +1,6 @@
 <?php
+$siteurl = 'http://homeworks.mgnout.com/lessons/lesson11/';
+
 require __DIR__ . '/DBResource.php';
 
 if(isset($_GET['mysqli'])){

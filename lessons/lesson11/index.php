@@ -146,7 +146,7 @@
                 </ol>
             </div>
             <div class="input-area">
-                <form method="post" action="commentaction.php">
+                <form method="post" action="controllers/commentaction.php">
                     <span>Please enter your name: </span>
                     <br />
                     <input class="input-area-name" type="text" name="name" />
