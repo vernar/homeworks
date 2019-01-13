@@ -1,0 +1,21 @@
+.user-comment {
+    border: 1px solid;
+    margin: 5px;
+}
+.user-comment-comment{
+
+}
+.user-comment-name{
+  font-size: 20px;
+}
+.input-area {
+    margin-top: 30px;
+}
+
+.input-area textarea{
+width: 593px;
+height: 74px;
+}
+.input-area-name{
+
+}
