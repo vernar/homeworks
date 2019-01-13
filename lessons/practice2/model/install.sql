@@ -66,6 +66,14 @@ CREATE TABLE `skills`(
    PRIMARY KEY (`skills_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `comments`(
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `comment` TEXT,
+  `date_submit` DATE NOT NULL,
+   PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO `person` (`name`, `tagline`, `email`, `phone`, `website_name`, `website_url`, `summary`) VALUES
 ('Arbuzov Dmitry', 'Technical support engineer', 'arbuzov.mail@gmail.com', '+375(29) 7447474', 'mtest.su', 'http://php7.mgtest.su/acv/lessons/lesson6/index.html', 'Начал свою карьеру с работы электромонтёром на одном из беларусских предприятий, параллельно заочно получая специальность "Инженер системотехник", что позволило мне через 3 года перевестить на должность "электронщик". <p>По окончанию учёбы, ушёл с работы на предприятии и устроился на работу, сотрудником техподдери, в одну из беларусских компаний веб разработки.');
 

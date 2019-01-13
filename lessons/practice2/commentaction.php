@@ -1,6 +1,6 @@
 <?php
-/**
- * File: commentaction.php.
- * User: dmitry
- * Date: 13.01.19
- */
+require_once __DIR__. '/model/data.php';
+
+$connection->addComment(trim($_POST['name']), trim($_POST['comment']));
+header('location: index.php');
+exit;
