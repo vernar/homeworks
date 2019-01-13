@@ -17,6 +17,7 @@
 
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/custom.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,37 +39,37 @@
             <ul class="list-unstyled contact-list">
                 <li class="email"><i class="fa fa-envelope"></i><a href="mailto: <?= $email ?>"><?= $email ?></a></li>
                 <li class="phone"><i class="fa fa-phone"></i><a href="<?=$phone ?>"><?=$phone ?></a></li>
-                <?php foreach ($website as $sitename => $url){ ?>
+                <?php foreach ($website as $sitename => $url): ?>
                     <li class="website"><i class="fa fa-globe"></i><a href="<?= $url ?>" target="_blank"><?=$sitename ?></a></li>
-                <?php } ?>
+                <?php endforeach; ?>
             </ul>
         </div><!--//contact-container-->
         <div class="education-container container-block">
             <h2 class="container-block-title">Education</h2>
-            <?php foreach ($education as $key => $value){ ?>
+            <?php foreach ($education as $key => $value): ?>
                 <div class="item">
                     <h4 class="degree"><?=$value['degree'] ?></h4>
                     <h5 class="meta"><?=$value['meta'] ?></h5>
                     <div class="time"><?=$value['time_from'] . $value['time_to'] ? $value['time_to'] : '...'?></div>
                 </div><!--//item-->
-            <?php } ?>
+            <?php endforeach; ?>
         </div><!--//education-container-->
 
         <div class="languages-container container-block">
             <h2 class="container-block-title">Languages</h2>
             <ul class="list-unstyled interests-list">
-                <?php foreach ($language as $language){ ?>
+                <?php foreach ($language as $language): ?>
                     <li><?=$language['language']?> <span class="lang-desc">(<?=$language['level']?>)</span></li>
-                <?php } ?>
+                <?php endforeach; ?>
             </ul>
         </div><!--//interests-->
 
         <div class="interests-container container-block">
             <h2 class="container-block-title">Interests</h2>
             <ul class="list-unstyled interests-list">
-                <?php foreach ($interests as $interest){ ?>
+                <?php foreach ($interests as $interest): ?>
                     <li><?=$interest['interest']?></li>
-                <?php } ?>
+                <?php endforeach; ?>
             </ul>
         </div><!--//interests-->
 
@@ -85,7 +86,7 @@
 
         <section class="section experiences-section">
             <h2 class="section-title"><i class="fa fa-briefcase"></i>Experiences</h2>
-            <?php foreach ($experiences as $exp){ ?>
+            <?php foreach ($experiences as $exp): ?>
                 <div class="item">
                     <div class="meta">
                         <div class="upper-row">
@@ -98,7 +99,7 @@
                         <p><?=$exp['details'] ?></p>
                     </div><!--//details-->
                 </div><!--//item-->
-            <?php } ?>
+            <?php endforeach; ?>
         </section><!--//section-->
 
         <section class="section projects-section">
@@ -106,18 +107,18 @@
             <div class="intro">
                 <!--                    <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>-->
             </div><!--//intro-->
-            <?php foreach ($projects as $item){ ?>
+            <?php foreach ($projects as $item): ?>
                 <div class="item">
                     <span class="project-title"><a href="<?=$item['url']?>"><?=$item['title']?></a></span> - <span class="project-tagline"><?=$item['description']?></span>
                 </div><!--//item-->
-            <?php } ?>
+            <?php endforeach; ?>
 
         </section><!--//section-->
 
         <section class="skills-section section">
             <h2 class="section-title"><i class="fa fa-rocket"></i>Skills &amp; Proficiency</h2>
             <div class="skillset">
-                <?php foreach ($skills as $skill){?>
+                <?php foreach ($skills as $skill): ?>
                     <div class="item">
                         <h3 class="level-title"><?=$skill['title']?></h3>
                         <div class="level-bar">
@@ -125,10 +126,38 @@
                             </div>
                         </div><!--//level-bar-->
                     </div><!--//item-->
-                <?php }?>
+                <?php endforeach; ?>
             </div>
         </section><!--//skills-section-->
+        <section class="comment-section section">
+            <div class="user-comments">
+                <ol>
+                <?php foreach ($connection->getComments() as $comment): ?>
+                <?php if (strpos($comment['comment'], "редиска")) continue; ?>
+                    <li>
+                        <div class="user-comment">
+                            <span class="user-comment-name"><?= $comment['name']?></span>
+                            <span class="user-comment-date"><?= $comment['date_submit']?></span>
+                            <br/>
+                            <span class="user-comment-comment"><?= $comment['comment']?></span>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                </ol>
+            </div>
+            <div class="input-area">
+                <form method="post" action="commentaction.php">
+                    <span>Please enter your name: </span>
+                    <br />
+                    <input class="input-area-name" type="text" name="name" />
+                    <br />
+                    <span>Please enter your message</span>
+                    <textarea name="comment"></textarea>
+                    <input class="input-area-button" type="submit" />
+                </form>
+            </div>
 
+        </section>
     </div><!--//main-body-->
 </div>
 

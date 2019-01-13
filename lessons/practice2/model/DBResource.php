@@ -41,7 +41,29 @@ class DBResource
         return $this->db;
     }
 
+    public function getComments(){
+         if ($this->dbEngine === self::DB_PDO ) {
+             /** @var PDO $db */
+             $db = $this->db;
+             $result = $db->query("SELECT * FROM `comments` ")
+                ->fetchAll(PDO::FETCH_ASSOC);
+         }
+        if ($this->dbEngine === self::DB_Mysqli) {
+            /** @var mysqli $db */
+            $db = $this->db;
+            $result = $db->query("SELECT * FROM `comments` ")
+                ->fetch_all(MYSQLI_ASSOC);
+        }
+        return $result;
+    }
 
+    public function addComment($name, $comment){
+        if (strpos($comment, "редиска")){
+            return;
+        }
+        $sql = 'INSERT INTO comments (name, comment, date_submit) VALUES (?, ?, NOW())';
+        $this->db->prepare($sql)->execute([$name, $comment]);
+    }
 
     public function getDataAsArrayById($id = 1)
     {
