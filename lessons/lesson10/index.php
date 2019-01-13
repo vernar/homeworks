@@ -108,7 +108,7 @@ if (!empty($login) ) {
             $confirmationURL = $siteurl . 'index.php?action=confirmaction&confirmkey=' . $confirmkey;
             $login = isset($_POST['login'] ) ? $_POST['login'] : '';
             $email = isset($_POST['email'] ) ? $_POST['email'] : '';
-            $color = isset($_POST['color'] ) ? $_POST['color'] : '';
+            $color = isset($_POST['color'] ) ? array_shift($_POST['color']) : '';
             $password = isset($_POST['password'] ) ? $_POST['password'] : '';
 
             if ( !empty($login) &&
@@ -126,6 +126,7 @@ if (!empty($login) ) {
                 header('location: ' . $siteurl . 'index.php?action=login');
                 exit;
             } else {
+                $_SESSION['message'][] = 'Incorrect data. Try again';
                 include_once __DIR__ . '/register.php';
             }
             break;

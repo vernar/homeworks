@@ -15,7 +15,12 @@
     <span>email</span>
     <input type="text" name="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" />
     <span>color</span>
-    <input type="text" name="color" value="<?= isset($_POST['color']) ? $_POST['color'] : '' ?>" />
+    <select name="color[]">
+        <option value="green">green</option>
+        <option value="black">black</option>
+        <option value="red">red</option>
+        <option value="blue">blue</option>
+    </select>
     <span>password</span>
     <input type="password" name="password" value="" />
     <input type="submit" title="submit" />
