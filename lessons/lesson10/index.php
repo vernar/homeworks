@@ -9,7 +9,7 @@ include_once __DIR__ . '/mailer/PHPMailer.php';
 include_once __DIR__ . '/mailer/Exception.php';
 include_once __DIR__ . '/mailer/SMTP.php';
 
-$siteurl = 'http://homeworks.mgnout.com/lessons/lesson10/';
+$siteurl = 'http://homeworks.mgtest.su/lessons/lesson10/';
 
 $dbhost = 'localhost';
 $dbuser = 'root';
@@ -81,8 +81,8 @@ if (!empty($login) ) {
                 $_SESSION['login'] = true;
                 $_SESSION['name'] = $result['name'];
                 $_SESSION['mail'] = $result['mail'];
-                $_SESSION['color'] = $result['color'];
-                setcookie('color', $result['color']);
+                $_SESSION['color'] = $color;
+                setcookie('color', $color);
                 $_SESSION['message'][] = 'You are login in';
                 header('location: ' . $siteurl . 'index.php');
             } else {
@@ -93,8 +93,8 @@ if (!empty($login) ) {
             break;
         case 'confirmaction':
             $confirmkey = $_GET['confirmkey'];
-            $result = $db->query("SELECT * FROM user WHERE confirm_key = {$confirmkey}")
-                ->fetch(PDO::FETCH_ASSOC);
+            $result = $db->query("SELECT * FROM user WHERE confirm_key = '{$confirmkey}'")
+                ->fetch();
             if ($result['confirm_key'] == $confirmkey) {
                 $_SESSION['is_active'] = true;
                 $_SESSION['message'][] = 'Registration completed. Please login';
