@@ -14,6 +14,13 @@
         <input type="text" name="login" value="<?= isset($_POST['login']) ?$_POST['login']: ''  ?>" />
         <span>password</span>
         <input type="password" name="password" value="" />
+        <span>color</span>
+        <select name="color[]">
+            <option value="green">green</option>
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+        </select>
         <input type="submit" title="submit" />
     </form>
     <p></p><span><a href="index.php?action=register">Register</a> </span>

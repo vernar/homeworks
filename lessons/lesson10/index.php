@@ -77,6 +77,7 @@ if (!empty($login) ) {
             $result = $db->query("SELECT * FROM user WHERE name = '{$login}' OR mail = '{$login}' AND password = '{$password}'")
                 ->fetch(PDO::FETCH_ASSOC);
             if (!empty($result)) {
+                $color = isset($_POST['color'] ) ? array_shift($_POST['color']) : '';
                 $_SESSION['login'] = true;
                 $_SESSION['name'] = $result['name'];
                 $_SESSION['mail'] = $result['mail'];
@@ -107,7 +108,7 @@ if (!empty($login) ) {
             $confirmationURL = $siteurl . 'index.php?action=confirmaction&confirmkey=' . $confirmkey;
             $login = isset($_POST['login'] ) ? $_POST['login'] : '';
             $email = isset($_POST['email'] ) ? $_POST['email'] : '';
-            $color = isset($_POST['color'] ) ? array_shift($_POST['color']) : '';
+            $color = 'white';
             $password = isset($_POST['password'] ) ? $_POST['password'] : '';
 
             if ( !empty($login) &&
