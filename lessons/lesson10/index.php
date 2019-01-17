@@ -120,6 +120,7 @@ if (!empty($login) ) {
                 sendEmail($email, $login, $confirmationURL );
                 $sql = 'INSERT INTO `user` (mail, name, password, color, confirm_key, is_active) VALUES (?, ?, ?, ?, ?, ?)';
                 $db->prepare($sql)->execute([$email, $login, $password, $color, $confirmkey, 0 ]);
+
                 $_SESSION['user'] = $login;
                 $_SESSION['is_active'] = false;
                 $_SESSION['message'][] = 'An email has been sent to your email address. To complete registration, click on the link.';

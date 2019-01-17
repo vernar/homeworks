@@ -30,6 +30,18 @@ class DBResource
         $this->dbpass = $dbpass;
         $this->dbtable = $dbtable;
 
+        //check if database is exist, if no we try create it
+        $pdo = new PDO("mysql:host={$dbhost};", $dbuser, $dbpass);
+        $stmt = $pdo->query("SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{$dbtable}'");
+        if (!(bool)$stmt->fetchColumn()) {
+            echo 'Data base is not exist, try create....' . '</br>';
+            $pdo->query(file_get_contents(__DIR__ . '/install.sql'))->execute();
+            $stmt = $pdo->query("SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{$dbtable}'");
+            echo  '</br>';
+            echo (bool) $stmt->fetchColumn() ? 'success' : 'un success';
+            exit;
+        }
+
         if ($dbEngine == self::DB_PDO){
             $this->db = new PDO("mysql:host={$dbhost};dbname={$dbtable};charset=utf8", $dbuser, $dbpass);
             $this->dbEngine = self::DB_PDO;

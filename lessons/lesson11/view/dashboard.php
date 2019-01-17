@@ -27,6 +27,7 @@
         }
     </style>
     <title>Dashboard</title>
+
 </head>
 <header>
     <a href="<?= $siteurl ?>controllers/adminaction.php?action=logoutaction" >logout</a>
@@ -34,6 +35,16 @@
     <span> User role: <?= $_SESSION['role'] == DBResource::ROLE_ADMIN ? 'admin' : 'moderator'?></span>
 </header>
 <body>
+<form method="post" action="controllers/adminaction.php">
+    <input type="hidden" name="action" value="deleteimage" />
+    <button type="submit" style="color: red;">X</button>
+</form>
+<img class="profile" src="assets/images/profile.jpg<?= '?' . mt_rand(100,999) ?>" height="150" style="border-radius: 80px;" onerror="this.src ='assets/images/default.png'" />
+<form enctype="multipart/form-data" action="controllers/adminaction.php" method="post">
+    <input type="hidden" name="action" value="changeimage" />
+    Upload new image: <input name="file" type="file" />
+    <input name="submit" type="submit" value="Submit File" />
+</form>
 <table class="minimalistBlack">
     <tbody>
     <?php foreach ($connection->getAllComments() as $comment): ?>

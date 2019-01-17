@@ -3,7 +3,10 @@ error_reporting(E_ALL);       // устанавливает уровень от�
 ini_set('display_errors', 1); // дает команду интерпретатору php выводить все отслеживаемые ошибки в браузере
 
 session_start();
-$siteurl = 'http://homeworks.mgnout.com/lessons/lesson11/';
+
+
+
+$siteurl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/lessons/lesson11/';
 
 require __DIR__ . '/DBResource.php';
 

@@ -46,4 +46,44 @@ switch ($action){
         header('location: ' . $siteurl . 'admin.php');
         exit;
         break;
+    case 'changeimage':
+            switch ($_FILES['file']['error']) {
+                case UPLOAD_ERR_OK:
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    throw new RuntimeException('No file sent.');
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    throw new RuntimeException('Exceeded filesize limit.');
+                default:
+                    throw new RuntimeException('Unknown errors.');
+            }
+            if ($_FILES['file']['size'] > 100000000) {
+                throw new RuntimeException('Exceeded filesize limit.');
+            }
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            if (false === $ext = array_search(
+                    $finfo->file($_FILES['file']['tmp_name']),
+                    array(
+                        'jpg' => 'image/jpeg',
+                        'png' => 'image/png'
+                    ),
+                    true
+                )) {
+                throw new RuntimeException('Invalid file type.');
+            }
+            //unlink(__DIR__ . '/../assets/images/profile.jpg');
+            if (!move_uploaded_file(
+                $_FILES['file']['tmp_name'], __DIR__ . '/../assets/images/profile.jpg')) {
+                throw new RuntimeException('Failed to move uploaded file.');
+            }
+            header('location: ' . $siteurl . 'admin.php');
+            exit;
+        break;
+    case 'deleteimage':
+        unlink(__DIR__ . '/../assets/images/profile.jpg');
+        header('location: ' . $siteurl . 'admin.php');
+        exit;
+        break;
+
 }

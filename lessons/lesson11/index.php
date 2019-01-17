@@ -30,7 +30,7 @@
 <div class="wrapper">
     <div class="sidebar-wrapper">
         <div class="profile-container">
-            <img class="profile" src="assets/images/profile.jpg" height="150" style="border-radius: 80px;" alt="" />
+            <img class="profile" src="assets/images/profile.jpg<?= '?' . mt_rand(100,999) ?>" height="150" style="border-radius: 80px;" onerror="this.src ='assets/images/default.png'" />
             <h1 class="name"><?= $name ?></h1>
             <h3 class="tagline"><?= $tagline ?></h3>
         </div><!--//profile-container-->
